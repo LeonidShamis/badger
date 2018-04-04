@@ -14,6 +14,10 @@ func uint64ToBytes(i uint64) []byte {
 	return buf[:]
 }
 func bytesToUint64(b []byte) uint64 {
+	// https://github.com/dgraph-io/badger/issues/449#issuecomment-378534988
+	if len(b) == 0 {
+		return 0
+	}
 	return binary.BigEndian.Uint64(b)
 }
 // Merge function to add two uint64 numbers
